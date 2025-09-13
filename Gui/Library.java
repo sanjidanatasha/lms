@@ -38,10 +38,25 @@ import Classes.MemberList;
 
 public class Library extends JFrame {
 
+    private BookList bookList;
+    private MemberList memberList;
+
+
     public Library(BookList bookList, MemberList memberList) {
         super("Library MS");
+        this.bookList = bookList;
+        this.memberList = memberList;
         super.setVisible(true);
 
+    }
+
+    public void initialize() {
+        this.setSize(800, 600);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+        this.setResizable(false);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
 
 }

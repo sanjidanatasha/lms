@@ -16,11 +16,11 @@ public class BookList {
 
     }
 
-    public void IssueBook(Member member, Book book) {
+    public void issueBook(Member member, Book book) {
 
     }
 
-    public void ReturnBook(Member member, Book book) {
+    public void returnBook(Member member, Book book) {
 
     }
 

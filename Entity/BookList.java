@@ -4,10 +4,13 @@ public class BookList {
     private Book[] books;
     private int bookCount;
 
-
     public BookList(int maxCount) {
         this.books = new Book[maxCount];
         this.bookCount = 0;
+    }
+
+    public Book[] getBooks() {
+        return books;
     }
 
     public void addBook(Book book) {
@@ -47,20 +50,18 @@ public class BookList {
                 break;
             }
         }
-        
+
         if (!bookExists) {
             System.out.println("Book not available in the library.");
             return;
         }
-        
-        
+
         member.addBook(book);
         removeBook(book.getID());
         System.out.println("Book '" + book.getName() + "' issued to " + member.getName());
     }
 
-    public void ReturnBook(Member member, Book book) 
-    {
+    public void ReturnBook(Member member, Book book) {
         boolean hasBook = false;
         Book[] memberBooks = member.getBooks();
         for (Book b : memberBooks) {
@@ -69,13 +70,12 @@ public class BookList {
                 break;
             }
         }
-        
+
         if (!hasBook) {
             System.out.println(member.getName() + " does not have this book.");
             return;
         }
-        
-        
+
         member.removeBook(book);
         addBook(book);
         System.out.println("Book '" + book.getName() + "' returned by " + member.getName());
@@ -99,19 +99,26 @@ public class BookList {
         return null;
     }
 
-    public void displayAllBooks() {
+    public String displayAllBooks() {
+        String printString = "";
         if (bookCount == 0) {
             System.out.println("No books available in the library.");
-            return;
+            printString += "No books available in the library.";
+            return printString;
         }
-        
+
         System.out.println("\n=== Library Books ===");
+        printString += "\n=== Library Books ===\n";
         for (int i = 0; i < bookCount; i++) {
             Book book = books[i];
-            System.out.println("ID: " + book.getID() + 
-                             ", Title: " + book.getName() + 
-                             ", Author: " + book.getAuthor());
+            System.out.println("ID: " + book.getID() +
+                    ", Title: " + book.getName() +
+                    ", Author: " + book.getAuthor());
+            printString += "ID: " + book.getID() +
+                    ", Title: " + book.getName() +
+                    ", Author: " + book.getAuthor() + "\n";
         }
+        return printString;
     }
 
     public int getBookCount() {
@@ -128,6 +135,6 @@ public class BookList {
 
     public boolean isEmpty() {
         return bookCount == 0;
-        
+
     }
 }

@@ -1,170 +1,166 @@
 package Frame;
- 
+
 import Entity.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.*;
+import java.io.IOException;
 
- 
 public class FrameSample extends JFrame implements MouseListener, ActionListener {
     private Font f1, f2;
     private Color c1, c2;
     private JPanel panel;
-    private JLabel label1, label2, label3, label4, label5, label6 ;
-    private JTextField tf1, tf2, tf3, tf4,tf5;
+    private JLabel label1, label2, label3, label4, label5, label6;
+    private JTextField tf1, tf2, tf3, tf4, tf5;
     private JButton bt1, bt2, bt3, bt4;
     private JComboBox<String> jb1;
     private JTextArea ta1;
     private BookList bookList;
 
     public FrameSample() {
-        super("My First GUI");
-        super.setBounds(500, 100, 900, 900);
+        super("LIBRARY MANAGEMENT SYSTEM");
+        super.setBounds(500, 100, 900, 980);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-        bookList =new BookList(100);
+
+        bookList = new BookList(100);
 
         panel = new JPanel();
         panel.setLayout(null);
         c2 = new Color(204, 255, 204);
         panel.setBackground(c2);
- 
+
         f1 = new Font("Cambria", Font.BOLD, 30);
         f2 = new Font("Cambria", Font.BOLD, 20);
         c1 = new Color(255, 0, 0);
- 
+
         label1 = new JLabel("LIBRARY MANAGEMENT SYSTEM");
         label1.setBounds(250, 0, 500, 40);
         label1.setFont(f1);
         label1.setForeground(c1);
         panel.add(label1);
- 
+
         label2 = new JLabel("Book's Name:");
         label2.setBounds(20, 50, 150, 30);
         label2.setFont(f2);
         panel.add(label2);
- 
+
         tf1 = new JTextField();
         tf1.setBounds(220, 50, 150, 30);
         tf1.setFont(f2);
         panel.add(tf1);
- 
+
         label3 = new JLabel("Book's ID:");
         label3.setBounds(20, 90, 200, 30);
         label3.setFont(f2);
         panel.add(label3);
-        
+
         tf2 = new JTextField();
         tf2.setBounds(220, 90, 150, 30);
         tf2.setFont(f2);
         panel.add(tf2);
 
-        label4 = new JLabel("Genre");
+        label4 = new JLabel("Genre:");
         label4.setBounds(20, 130, 150, 30);
         label4.setFont(f2);
-        panel.add(label5);
- 
-        String Genres[] = new String[] { "", "Fiction" , "Thriller" , "Romantic" , "Horror" , "ScI-FIC"};
+        panel.add(label4);
+
+        String Genres[] = new String[] { "", "Fiction", "Thriller", "Romantic", "Horror", "ScI-FIC" };
         jb1 = new JComboBox(Genres);
         jb1.setBounds(220, 130, 150, 30);
         jb1.setFont(f2);
         panel.add(jb1);
-        
- 
-        label5 = new JLabel("Author");
+
+        label5 = new JLabel("Author:");
         label5.setBounds(20, 170, 150, 30);
         label5.setFont(f2);
         panel.add(label5);
- 
-        tf3= new JTextField();
+
+        tf3 = new JTextField();
         tf3.setBounds(220, 170, 270, 100);
         tf3.setFont(f2);
         panel.add(tf3);
-        
-         label6 = new JLabel("issue by name");
-        label6.setBounds(20, 210, 150, 30);
-        label6.setFont(f2);
-        panel.add(label6);
 
-        tf4= new JTextField();
-        tf4.setBounds(220, 210, 270, 100);
-        tf4.setFont(f2);
-        panel.add(tf4);
+        // label6 = new JLabel("issue by name");
+        // label6.setBounds(20, 210, 150, 30);
+        // label6.setFont(f2);
+        // panel.add(label6);
+
+        // tf4 = new JTextField();
+        // tf4.setBounds(220, 210, 270, 100);
+        // tf4.setFont(f2);
+        // panel.add(tf4);
 
         bt1 = new JButton("Delete by ID");
-		bt1.setBounds(350, 700, 150,30);
-		bt1.setFont(f2);
-		bt1.setBackground(Color.GREEN);
-		bt1.addMouseListener(this);
-		bt1.addActionListener(this);
-		panel.add(bt1);
+        bt1.setBounds(350, 700, 150, 30);
+        bt1.setFont(f2);
+        bt1.setBackground(Color.GREEN);
+        bt1.addMouseListener(this);
+        bt1.addActionListener(this);
+        panel.add(bt1);
 
-         tf5= new JTextField();
-        tf5.setBounds(220, 250, 270, 100);
-        tf5.setFont(f2);
-        panel.add(tf5);
+        // tf5 = new JTextField();
+        // tf5.setBounds(220, 250, 270, 100);
+        // tf5.setFont(f2);
+        // panel.add(tf5);
 
-         bt2 = new JButton("Update");
-		bt2.setBounds(350, 750, 150,30);
-		bt2.setFont(f2);
-		bt2.setBackground(Color.GREEN);
-		bt2.addMouseListener(this);
-		bt2.addActionListener(this);
-		panel.add(bt2);
+        bt2 = new JButton("Update");
+        bt2.setBounds(350, 750, 150, 30);
+        bt2.setFont(f2);
+        bt2.setBackground(Color.GREEN);
+        bt2.addMouseListener(this);
+        bt2.addActionListener(this);
+        panel.add(bt2);
 
-         bt3 = new JButton("Add book");
-		bt3.setBounds(350, 800, 150,30);
-		bt3.setFont(f2);
-		bt3.setBackground(Color.GREEN);
-		bt3.addMouseListener(this);
-		bt3.addActionListener(this);
-		panel.add(bt3);
+        bt3 = new JButton("Add book");
+        bt3.setBounds(350, 800, 150, 30);
+        bt3.setFont(f2);
+        bt3.setBackground(Color.GREEN);
+        bt3.addMouseListener(this);
+        bt3.addActionListener(this);
+        panel.add(bt3);
 
-         bt4 = new JButton("Exit");
-		bt4.setBounds(350, 850, 150,30);
-		bt4.setFont(f2);
-		bt4.setBackground(Color.GREEN);
-		bt4.addMouseListener(this);
-		bt4.addActionListener(this);
-		panel.add(bt4);
+        bt4 = new JButton("Exit");
+        bt4.setBounds(350, 850, 150, 30);
+        bt4.setFont(f2);
+        bt4.setBackground(Color.GREEN);
+        bt4.addMouseListener(this);
+        bt4.addActionListener(this);
+        panel.add(bt4);
 
         ta1 = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(ta1);
-        scrollPane.setBounds(20, 550, 845, 300);
+        scrollPane.setBounds(20, 300, 845, 300);
         ta1.setFont(f2);
         panel.add(scrollPane);
         super.add(panel);
+        readFromFile();
+        super.setVisible(true);
+
     }
 
-        public void mousePressed(MouseEvent me) 
-        {
-        }
- 
-         public void mouseReleased(MouseEvent me) 
-         {
-         }
- 
-        public void mouseClicked(MouseEvent me) 
-        {
-       
-        }
- 
-        public void mouseEntered(MouseEvent me) {
+    public void mousePressed(MouseEvent me) {
+    }
+
+    public void mouseReleased(MouseEvent me) {
+    }
+
+    public void mouseClicked(MouseEvent me) {
+
+    }
+
+    public void mouseEntered(MouseEvent me) {
         if (me.getSource() == bt1) {
             bt1.setBackground(Color.DARK_GRAY);
         } else if (me.getSource() == bt2) {
             bt2.setBackground(new Color(0, 150, 0));
         } else if (me.getSource() == bt3) {
             bt3.setBackground(new Color(200, 0, 0));
-        }
-        else if (me.getSource() == bt4) {
+        } else if (me.getSource() == bt4) {
             bt4.setBackground(new Color(200, 0, 0));
         }
     }
- 
+
     public void mouseExited(MouseEvent me) {
         if (me.getSource() == bt1) {
             bt1.setBackground(Color.BLUE);
@@ -172,42 +168,39 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
             bt2.setBackground(Color.GREEN);
         } else if (me.getSource() == bt3) {
             bt3.setBackground(Color.RED);
-        }
-        else if (me.getSource() == bt4) {
+        } else if (me.getSource() == bt4) {
             bt4.setBackground(Color.RED);
         }
 
     }
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == bt4) {
             System.exit(0);
         }
-         if (ae.getSource() == bt3) {
+        if (ae.getSource() == bt3) {
             String name = tf1.getText();
-            String author =tf3.getText();
-           
-            Genres = (String) jb1.getSelectedItem();
- 
-           
+            String author = tf3.getText();
+            String id = tf2.getText();
+
+            String Genres = (String) jb1.getSelectedItem();
+
             String issues = ta1.getText();
- 
-         
- 
-            if (name.isEmpty() || author.isEmpty())
-                    {
+
+            if (name.isEmpty() || author.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please fill up all information!");
             } else {
-                Book book = new Book( name, author);
-            
-               bookList.addBook(book);
-               book.insertInfo();
- 
+                Book book = new Book(Integer.parseInt(id), name, author);
+
+                bookList.addBook(book);
+                book.insertInfo();
+
                 JOptionPane.showMessageDialog(this, "Book added successfully saved!");
-                check();
-                displayBooks();
+                readFromFile();
+                // displayBooks();
             }
         }
- 
+
         if (ae.getSource() == bt1) {
             String idToDelete = tf2.getText().trim();
             if (idToDelete.isEmpty()) {
@@ -217,32 +210,50 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
                     int id = Integer.parseInt(idToDelete);
                     bookList.removeBook(id);
                     JOptionPane.showMessageDialog(this, "Book with ID " + id + " deleted!");
-                displayBooks();
+                    removeDataAndWriteToFile();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Please enter a valid numeric ID!");
+                }
+
             }
-            catch(NumberFormatException e)
-            {
-                JOptionPane.showMessageDialog(this, "Please enter a valid numeric ID!");
-            }
-            
-           }
         }
     }
- 
+
+    public void removeDataAndWriteToFile() {
+        try {
+            File file = new File(".\\userdata.txt");
+
+            if (!file.exists()) {
+                file.delete();
+            }
+
+            for (Book book : bookList.getBooks()) {
+                book.insertInfo();
+            }
+
+        }
+
+        catch (Exception ioe) {
+            ioe.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error writing to file!");
+        }
+    }
+
     private void deleteByName(String nameToDelete) {
         try {
- 
-            File inputFile = new File("C:\\Users\\nova\\OneDrive\\Desktop\\java project\\File\\userdata.txt");
-           
-            File tempFile = new File("C:\\Users\\nova\\OneDrive\\Desktop\\java project\\File\\userdata.txt");
-           
+
+            File inputFile = new File(".\\userdata.txt");
+
+            File tempFile = new File(".\\userdata.txt");
+
             inputFile.getParentFile().mkdirs();
- 
+
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
- 
+
             String currentLine;
             boolean found = false;
- 
+
             while ((currentLine = reader.readLine()) != null) {
                 if (currentLine.contains("Name: " + nameToDelete)) {
                     found = true;
@@ -253,56 +264,53 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
                     writer.write(currentLine + System.getProperty("line.separator"));
                 }
             }
- 
+
             writer.close();
             reader.close();
- 
+
             if (found) {
                 if (inputFile.delete()) {
                     tempFile.renameTo(inputFile);
                     JOptionPane.showMessageDialog(this, "Record deleted successfully!");
-                    ta2.setText("");
-                    check();
+                    ta1.setText("");
+                    readFromFile();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error deleting record!");
- 
+
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "No record found with name: " + nameToDelete);
                 tempFile.delete();
             }
- 
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error deleting record!");
         }
     }
- 
-    private void check() {
+
+    private void readFromFile() {
         try {
-            ta2.setText("");
-            File file = new File("C:\\Users\\nova\\OneDrive\\Desktop\\java project\\File\\userdata.txt");
-           
+            //
+            String str = "";
+            File file = new File(".\\userdata.txt");
+
             if (file.exists()) {
                 FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
                 String line;
                 while ((line = br.readLine()) != null) {
-                    ta2.append(line + "\n");
+                    String[] items = line.split(",");
+                    Book book = new Book(Integer.parseInt(items[0]), items[1], items[2]);
+                    bookList.addBook(book);
                 }
                 br.close();
             }
+
+            ta1.setText(bookList.displayAllBooks());
         } catch (IOException ioe) {
             ioe.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error!");
         }
     }
 }
-    }
-
-
-
- 
- 
-}
-

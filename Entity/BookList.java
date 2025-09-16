@@ -42,45 +42,6 @@ public class BookList {
         }
     }
 
-    public void IssueBook(Member member, Book book) {
-        boolean bookExists = false;
-        for (int i = 0; i < bookCount; i++) {
-            if (books[i].getID() == book.getID()) {
-                bookExists = true;
-                break;
-            }
-        }
-
-        if (!bookExists) {
-            System.out.println("Book not available in the library.");
-            return;
-        }
-
-        member.addBook(book);
-        removeBook(book.getID());
-        System.out.println("Book '" + book.getName() + "' issued to " + member.getName());
-    }
-
-    public void ReturnBook(Member member, Book book) {
-        boolean hasBook = false;
-        Book[] memberBooks = member.getBooks();
-        for (Book b : memberBooks) {
-            if (b != null && b.getID() == book.getID()) {
-                hasBook = true;
-                break;
-            }
-        }
-
-        if (!hasBook) {
-            System.out.println(member.getName() + " does not have this book.");
-            return;
-        }
-
-        member.removeBook(book);
-        addBook(book);
-        System.out.println("Book '" + book.getName() + "' returned by " + member.getName());
-    }
-
     public Book findBookById(int bookId) {
         for (int i = 0; i < bookCount; i++) {
             if (books[i].getID() == bookId) {
@@ -113,10 +74,12 @@ public class BookList {
             Book book = books[i];
             System.out.println("ID: " + book.getID() +
                     ", Title: " + book.getName() +
-                    ", Author: " + book.getAuthor());
+                    ", Author: " + book.getAuthor() +
+                    ", Genre: " + book.getGenre());
             printString += "ID: " + book.getID() +
                     ", Title: " + book.getName() +
-                    ", Author: " + book.getAuthor() + "\n";
+                    ", Author: " + book.getAuthor() +
+                    ", Genre: " + book.getGenre() + "\n";
         }
         return printString;
     }

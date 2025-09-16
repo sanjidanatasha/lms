@@ -190,13 +190,13 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
             if (name.isEmpty() || author.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please fill up all information!");
             } else {
-                Book book = new Book(Integer.parseInt(id), name, author);
+                Book book = new Book(Integer.parseInt(id), name, author, Genres);
 
                 bookList.addBook(book);
                 book.insertInfo();
 
                 JOptionPane.showMessageDialog(this, "Book added successfully saved!");
-                readFromFile();
+                ta1.setText(bookList.displayAllBooks());
                 // displayBooks();
             }
         }
@@ -211,23 +211,26 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
                     bookList.removeBook(id);
                     JOptionPane.showMessageDialog(this, "Book with ID " + id + " deleted!");
                     removeDataAndWriteToFile();
+                    ta1.setText(bookList.displayAllBooks());
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "Please enter a valid numeric ID!");
                 }
 
             }
         }
+
     }
 
     public void removeDataAndWriteToFile() {
         try {
             File file = new File(".\\userdata.txt");
 
-            if (!file.exists()) {
+            if (file.exists()) {
                 file.delete();
             }
 
-            for (Book book : bookList.getBooks()) {
+            for (int i = 0; i < bookList.getBookCount(); i++) {
+                Book book = bookList.getBooks()[i];
                 book.insertInfo();
             }
 
@@ -236,56 +239,6 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
         catch (Exception ioe) {
             ioe.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error writing to file!");
-        }
-    }
-
-    private void deleteByName(String nameToDelete) {
-        try {
-
-            File inputFile = new File(".\\userdata.txt");
-
-            File tempFile = new File(".\\userdata.txt");
-
-            inputFile.getParentFile().mkdirs();
-
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
-            String currentLine;
-            boolean found = false;
-
-            while ((currentLine = reader.readLine()) != null) {
-                if (currentLine.contains("Name: " + nameToDelete)) {
-                    found = true;
-                    for (int i = 0; i < 9; i++) {
-                        reader.readLine();
-                    }
-                } else {
-                    writer.write(currentLine + System.getProperty("line.separator"));
-                }
-            }
-
-            writer.close();
-            reader.close();
-
-            if (found) {
-                if (inputFile.delete()) {
-                    tempFile.renameTo(inputFile);
-                    JOptionPane.showMessageDialog(this, "Record deleted successfully!");
-                    ta1.setText("");
-                    readFromFile();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error deleting record!");
-
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "No record found with name: " + nameToDelete);
-                tempFile.delete();
-            }
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error deleting record!");
         }
     }
 
@@ -301,7 +254,7 @@ public class FrameSample extends JFrame implements MouseListener, ActionListener
                 String line;
                 while ((line = br.readLine()) != null) {
                     String[] items = line.split(",");
-                    Book book = new Book(Integer.parseInt(items[0]), items[1], items[2]);
+                    Book book = new Book(Integer.parseInt(items[0]), items[1], items[2], items[3]);
                     bookList.addBook(book);
                 }
                 br.close();

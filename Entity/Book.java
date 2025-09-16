@@ -3,20 +3,20 @@ package Entity;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 public class Book extends BookName {
     private int id;
     private String author;
+    private String genre;
     private File file;
     private FileWriter fwriter;
 
-    public Book(int id, String name, String author) {
+    public Book(int id, String name, String author, String genre) {
         super(name);
         this.author = author;
         this.id = id;
+        this.genre = genre;
     }
 
     public int getID() {
@@ -32,6 +32,10 @@ public class Book extends BookName {
         return author;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
     @Override
     public void setName(String name) {
         super.setName(name);
@@ -39,6 +43,10 @@ public class Book extends BookName {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public String getBookInfoAsString() {
@@ -58,13 +66,8 @@ public class Book extends BookName {
                 file.createNewFile();
             }
 
-            // LocalDateTime myDateObj = LocalDateTime.now();
-            // DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm a,
-            // dd/MM/yyyy");
-            // String timeAndDate = myDateObj.format(myFormatObj);
-
             fwriter = new FileWriter(file, isAppend);
-            fwriter.write(this.id + "," + this.name + "," + this.author);
+            fwriter.write(this.id + "," + this.name + "," + this.author + "," + this.genre + '\n');
 
             fwriter.flush();
             fwriter.close();
